@@ -1,5 +1,6 @@
 # insulam
 - island generator and explorer
+- written in scala
 - maybe a full game eventually...
 
 ![insulam](http://got.solar/downloads/insulam.png)
