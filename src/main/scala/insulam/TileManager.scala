@@ -5,11 +5,11 @@ import java.awt.{Color, Image}
 
 object TileManager {
   private val clamps = Array[Float](
-    0.01, // water
-    0.1, // grassland
-    0.4, // plains
-    0.6, // desert
-    0.9 // mountains
+    0.01, // water 0
+    0.1, // grassland 1
+    0.4, // plains 2
+    0.6, // desert 3
+    1.0 // mountains 4
   )
 
   var tiles = Array.ofDim[String](5, 3, 2)
@@ -77,7 +77,8 @@ object TileManager {
   }
 
   private def getTileIndexMountains(value: Float) = {
-    val special = value > clamps(3) && value < clamps(4)
+    println(value)
+    val special = value > clamps(3) && value < (clamps(3) + 0.1)
     if (special) Array(4, 1) else Array(4, 0)
   }
 
