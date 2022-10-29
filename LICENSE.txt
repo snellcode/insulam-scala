@@ -20,6 +20,8 @@ SOFTWARE.
 
 Attributions below:
 
+https://github.com/fabio-t/terrain-generator
+
 Map Generator (tergen, perlin islands):
 
  * Copyright (c) 2015-2018 Fabio Ticconi
