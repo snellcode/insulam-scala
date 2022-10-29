@@ -13,7 +13,7 @@ object App extends JFrame {
   val gridRowsLimit = 320
   val zoomIncrements = 8
   val minZoom = zoomIncrements
-  val maxZoom = 0
+  val maxZoom = zoomIncrements * 16
   private val card = new CardLayout
   var jFrameOffsetX = 16
   var jFrameOffsetY = 39
@@ -46,8 +46,8 @@ object App extends JFrame {
 
   def zoomInOut(i: Int): Unit = {
     var newTileSize = tileSize + (i * zoomIncrements)
-    newTileSize = Math.min(128, newTileSize)
-    newTileSize = Math.max(8, newTileSize)
+    newTileSize = Math.min(maxZoom, newTileSize)
+    newTileSize = Math.max(minZoom, newTileSize)
     tileSize = newTileSize
   }
 
