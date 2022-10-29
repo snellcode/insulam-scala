@@ -1,5 +1,6 @@
 package insulam
 
+import java.awt.event.{KeyEvent, MouseWheelEvent, MouseWheelListener}
 import javax.swing.JPanel
 
 object AppContent extends JPanel {
@@ -8,4 +9,5 @@ object AppContent extends JPanel {
   requestFocusInWindow
   grabFocus()
   addKeyListener(KeyHandler)
+  addMouseWheelListener(MouseHandler)
 }

@@ -22,7 +22,7 @@ object App extends JFrame {
   var gridCols = gridColsDefault
   var gridRows = gridRowsDefault
   var grid: Array[Array[Float]] = null
-  var tileSize = 64
+  var tileSize = 8
   var drawCamera = true
   var gameRunning = false
 
@@ -42,6 +42,13 @@ object App extends JFrame {
     AppContent.add(Options, String.valueOf(APP_STATE.OPTIONS))
     AppContent.add(Game, String.valueOf(APP_STATE.GAME))
     card.show(AppContent, String.valueOf(appState))
+  }
+
+  def zoomInOut(i: Int): Unit = {
+    var newTileSize = tileSize + (i * zoomIncrements)
+    newTileSize = Math.min(128, newTileSize)
+    newTileSize = Math.max(8, newTileSize)
+    tileSize = newTileSize
   }
 
   def genSeed(): Unit = {

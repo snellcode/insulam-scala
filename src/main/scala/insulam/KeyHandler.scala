@@ -18,11 +18,11 @@ object KeyHandler extends ActionListener with KeyListener {
     }
 
     if (code == KeyEvent.VK_SUBTRACT) {
-      zoomInOut(-1)
+      App.zoomInOut(-1)
       return
     }
     if (code == KeyEvent.VK_ADD) {
-      zoomInOut(1)
+      App.zoomInOut(1)
       return
     }
     code match {
@@ -43,13 +43,6 @@ object KeyHandler extends ActionListener with KeyListener {
       case _ =>
     }
 
-  }
-
-  def zoomInOut(i: Int): Unit = {
-    var newTileSize = App.tileSize + (i * App.zoomIncrements)
-    newTileSize = Math.min(128, newTileSize)
-    newTileSize = Math.max(8, newTileSize)
-    App.tileSize = newTileSize
   }
 
   override def keyReleased(e: KeyEvent): Unit = {
