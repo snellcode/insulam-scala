@@ -54,16 +54,16 @@ object App extends JFrame {
   }
 
   def stopGame(): Unit = {
-    Game.stop()
     gameRunning = false
+    Game.stop()
   }
 
   def startGame(): Unit = {
     grid = Grid.getGrid()
     Camera.center()
     Game.start()
-    gameRunning = true
     setAppState(APP_STATE.GAME)
+    gameRunning = true
   }
 
   def setAppState(appState: APP_STATE): Unit = {

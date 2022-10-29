@@ -50,8 +50,7 @@ object Init extends JPanel {
     super.paintComponent(g)
     val img = Util.loadImage("/images/init.png")
     g.drawImage(img, 0, 0, getWidth, getHeight, this)
-    if (App.gameRunning) resumeGameButton.setVisible(true)
-    else resumeGameButton.setVisible(false)
+    resumeGameButton.setVisible(App.gameRunning)
     repaint()
   }
 

@@ -10,7 +10,6 @@ object KeyHandler extends ActionListener with KeyListener {
   var rightPressed = false
 
   override def keyPressed(e: KeyEvent): Unit = {
-
     val code = e.getKeyCode
 
     if (code == KeyEvent.VK_C) {

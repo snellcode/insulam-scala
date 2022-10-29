@@ -19,7 +19,8 @@ object Game extends JPanel with Runnable {
   }
 
   def stop(): Unit = {
-    running = false
+    // dont know how to stop and start this yet
+    //    running = false
   }
 
   override def run(): Unit = {
@@ -29,7 +30,6 @@ object Game extends JPanel with Runnable {
     var currentTime: Long = 0
     var timer: Long = 0
     var drawCount: Int = 0
-
     while (running) {
       currentTime = System.nanoTime
       delta += ((currentTime - lastTime) / drawInterval)
@@ -37,8 +37,10 @@ object Game extends JPanel with Runnable {
       lastTime = currentTime
 
       if (delta >= 1) {
-        update()
-        repaint()
+        if (App.gameRunning) {
+          update()
+          repaint()
+        }
         delta -= 1
         drawCount += 1
       }
