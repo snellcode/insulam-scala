@@ -5,7 +5,7 @@ import java.awt.{Color, Image}
 
 object TileManager {
   private val clamps = Array[Float](
-    0.01, // water 0
+    0.0, // water 0
     0.1, // grassland 1
     0.4, // plains 2
     0.6, // desert 3
