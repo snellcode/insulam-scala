@@ -1,3 +1,3 @@
 # Download Lastest Build:
-https://got.solar/downloads/SC_Colonize.jar
+https://got.solar/downloads/insulam.jar
 
