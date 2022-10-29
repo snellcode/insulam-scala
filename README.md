@@ -1,6 +1,10 @@
+# insulam
+- island generator and explorer
+- maybe a full game eventually...
+
 ![insulam](http://got.solar/downloads/insulam.png)
 
-# Download Lastest Build:
+## Download Lastest Build:
 https://got.solar/downloads/insulam.jar
 
 ## Controls: wasd to move, + and - to zoom
