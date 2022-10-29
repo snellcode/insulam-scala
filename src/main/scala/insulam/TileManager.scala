@@ -77,7 +77,6 @@ object TileManager {
   }
 
   private def getTileIndexMountains(value: Float) = {
-    println(value)
     val special = value > clamps(3) && value < (clamps(3) + 0.1)
     if (special) Array(4, 1) else Array(4, 0)
   }
