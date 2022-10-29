@@ -6,7 +6,7 @@
 ![insulam](http://got.solar/downloads/insulam.png)
 
 ## Download Lastest Build:
-https://got.solar/downloads/insulam.jar
+https://github.com/snellcode/insulam/raw/main/insulam.jar
 
 ## Controls: wasd to move, + and - or mousewheel to zoom
 
