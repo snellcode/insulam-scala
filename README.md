@@ -8,7 +8,9 @@
 ## Download Lastest Build:
 https://github.com/snellcode/insulam/raw/main/insulam.jar
 
-## Controls: wasd to move, + and - or mousewheel to zoom
+## Controls: 
+- move with wasd
+- zoom with mousewheel, or + and -
 
 ## Special Thanks To:
 https://github.com/fabio-t/terrain-generator
