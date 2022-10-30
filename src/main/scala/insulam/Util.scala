@@ -11,7 +11,7 @@ object Util {
     Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 100)
   }
 
-  def loadImage(path: String): BufferedImage = {
+  def getImage(path: String): BufferedImage = {
     try return ImageIO.read(getClass.getResource(path))
     catch {
       case e: IOException =>

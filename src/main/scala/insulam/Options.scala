@@ -82,7 +82,7 @@ object Options extends JPanel {
 
   protected override def paintComponent(g: Graphics): Unit = {
     super.paintComponent(g)
-    val img = Util.loadImage("/images/init.png")
+    val img = Util.getImage("/images/init.png")
     g.drawImage(img, 0, 0, getWidth, getHeight, this)
 
     if (App.gameRunning) {

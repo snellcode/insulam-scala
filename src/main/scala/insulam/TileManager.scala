@@ -5,7 +5,7 @@ import java.awt.{Color, Image}
 
 object TileManager {
   private val clamps = Array[Float](
-    0.0, // water 0
+    0.01, // water 0
     0.1, // grassland 1
     0.4, // plains 2
     0.6, // desert 3
@@ -35,6 +35,9 @@ object TileManager {
     if (x == Math.floor(App.gridCols / 2) && y == Math.floor(App.gridRows / 2)) {
       return getTileIndexCenter
     }
+    if (value <= clamps(0)) {
+      return getTileIndexWater(value)
+    }
     if (value > clamps(0) && value < clamps(1)) {
       return getTileIndexGrassland(value)
     }
@@ -47,11 +50,11 @@ object TileManager {
     if (value > clamps(3) && value < clamps(4)) {
       return getTileIndexMountains(value)
     }
-    getTileIndexWater(value)
+    null
   }
 
   private def getTileIndexWater(value: Float) = {
-    val special = value > clamps(0) / 2
+    val special = value > clamps(0) / 4
     if (special) Array(0, 1) else Array(0, 0)
   }
 
@@ -82,7 +85,7 @@ object TileManager {
   def getTileImage(value: Float, x: Int, y: Int): BufferedImage = {
     val index = getTileIndex(value, x, y);
     val data = tiles(index(0))(index(1))
-    Util.loadImage(data(0))
+    Util.getImage(data(0))
   }
 
 }
