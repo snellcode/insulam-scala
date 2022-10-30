@@ -13,4 +13,9 @@ https://github.com/snellcode/insulam/raw/main/insulam.jar
 - zoom with mousewheel, or + and -
 
 ## Special Thanks To:
+
+- Java Terrain Generator
 https://github.com/fabio-t/terrain-generator
+
+- 2D Java Game Tutorial
+https://youtube.com/playlist?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
