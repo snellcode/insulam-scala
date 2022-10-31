@@ -2,7 +2,7 @@ Copyright (c) 2022 Phil Snell (MIT)
 
 Attributions below:
 
-Map Generator (tergen, perlin islands):
+#Map Generator (tergen, perlin islands):
 
 https://github.com/fabio-t/terrain-generator
 
@@ -20,7 +20,7 @@ https://github.com/fabio-t/terrain-generator
  * License for the specific language governing permissions and limitations under
  * the License.
 
-Map Generator (OpenSimplex Noise):
+#Map Generator (OpenSimplex Noise):
 
 https://github.com/lmas/opensimplex
 
@@ -33,11 +33,11 @@ https://github.com/lmas/opensimplex
  * any particular randomization library, so results will be the same when ported
  * to other languages.
 
-Fonts:
+#Fonts:
 x12y16pxMaruMonica
 http://www17.plala.or.jp/xxxxxxx/00ff/
 
-Some Sprites:
+#Some Sprites:
 
 Thanks for using Toen's Medieval Strategy Sprite Pack!!
 
@@ -58,7 +58,7 @@ Under the following terms:
     No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 
 
-LINKS:
+#LINKS:
 Andre Mari Coppola: https://twitter.com/ToenAndreMC
 Patreon: https://www.patreon.com/andremari
 itch.io dassets page: http://toen.itch.io/toens-medieval-strategy
