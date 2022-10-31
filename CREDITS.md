@@ -57,8 +57,6 @@ Under the following terms:
 
     No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 
-
-# LINKS:
 Andre Mari Coppola: https://twitter.com/ToenAndreMC
 Patreon: https://www.patreon.com/andremari
 itch.io dassets page: http://toen.itch.io/toens-medieval-strategy
