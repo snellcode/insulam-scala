@@ -44,25 +44,9 @@ object App extends JFrame {
     card.show(AppContent, String.valueOf(appState))
   }
 
-  def zoomInOut(i: Int): Unit = {
-    var newTileSize = tileSize + (i * zoomIncrements)
-    newTileSize = Math.min(maxZoom, newTileSize)
-    newTileSize = Math.max(minZoom, newTileSize)
-    tileSize = newTileSize
-  }
-
-  def genSeed(): Unit = {
-    seed = (Math.random * 1000).toInt
-  }
-
-  def resetGame(): Unit = {
-    stopGame()
-    startGame()
-  }
-
-  def stopGame(): Unit = {
-    gameRunning = false
-    Game.stop()
+  def setAppState(appState: APP_STATE): Unit = {
+    this.appState = appState
+    card.show(AppContent, String.valueOf(appState))
   }
 
   def startGame(): Unit = {
@@ -73,9 +57,25 @@ object App extends JFrame {
     gameRunning = true
   }
 
-  def setAppState(appState: APP_STATE): Unit = {
-    this.appState = appState
-    card.show(AppContent, String.valueOf(appState))
+  def stopGame(): Unit = {
+    gameRunning = false
+    Game.stop()
+  }
+
+  def resetGame(): Unit = {
+    stopGame()
+    startGame()
+  }
+
+  def zoomInOut(i: Int): Unit = {
+    var newTileSize = tileSize + (i * zoomIncrements)
+    newTileSize = Math.min(maxZoom, newTileSize)
+    newTileSize = Math.max(minZoom, newTileSize)
+    tileSize = newTileSize
+  }
+
+  def genSeed(): Unit = {
+    seed = (Math.random * 1000).toInt
   }
 
 }

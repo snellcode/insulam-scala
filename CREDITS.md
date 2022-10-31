@@ -33,6 +33,10 @@ https://github.com/lmas/opensimplex
  * any particular randomization library, so results will be the same when ported
  * to other languages.
 
+Fonts:
+x12y16pxMaruMonica
+http://www17.plala.or.jp/xxxxxxx/00ff/
+
 Some Sprites:
 
 Thanks for using Toen's Medieval Strategy Sprite Pack!!

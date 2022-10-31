@@ -23,6 +23,10 @@ object Game extends JPanel with Runnable {
     //    running = false
   }
 
+  def update(): Unit = {
+    Camera.update()
+  }
+
   override def run(): Unit = {
     val drawInterval: Double = (nanoSecond / 60).asInstanceOf[Double]
     var delta: Double = 0
@@ -50,10 +54,6 @@ object Game extends JPanel with Runnable {
         timer = 0
       }
     }
-  }
-
-  def update(): Unit = {
-    Camera.update()
   }
 
   override def paintComponent(g: Graphics): Unit = {
