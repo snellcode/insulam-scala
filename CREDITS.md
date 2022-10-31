@@ -1,4 +1,4 @@
-Copyright (c) 2022 Phil Snell (MIT)
+Copyright (c) 2022 Phil Snell (MIT License)
 
 Attributions below:
 
