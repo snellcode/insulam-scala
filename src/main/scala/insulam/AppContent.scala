@@ -9,5 +9,7 @@ object AppContent extends JPanel {
   requestFocusInWindow
   grabFocus()
   addKeyListener(KeyHandler)
-  addMouseWheelListener(MouseHandler)
+  addMouseWheelListener(MouseHandler.handleMouseWheel)
+  addMouseListener(MouseHandler)
+  addMouseMotionListener(MouseHandler)
 }

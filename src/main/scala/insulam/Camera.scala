@@ -14,6 +14,10 @@ object Camera {
     row = (Math.floor(App.gridRows / 2) + 1).toInt
   }
 
+  def to(coords: Unit): Unit = {
+    println(coords)
+  }
+
   def update(): Unit = {
     if (KeyHandler.upPressed) {
       row -= speed

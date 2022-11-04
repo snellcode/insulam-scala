@@ -35,6 +35,14 @@ object Grid {
       val image = TileManager.getTileImage(value, col, row)
       g2.drawImage(image, screenX, screenY, App.tileSize, App.tileSize, null)
     }
+    if (App.debug) {
+      g2.setColor(Color.GREEN)
+      g2.drawRect(screenX, screenY, App.tileSize, App.tileSize)
+      g2.setColor(Color.WHITE)
+      g2.fillRect(screenX, screenY, 20, 20)
+      g2.setColor(Color.BLACK)
+      g2.drawString(row.toString + ", " + col.toString, screenX, screenY + 14)
+    }
   }
 
   private def getScreenX(col: Int) = {

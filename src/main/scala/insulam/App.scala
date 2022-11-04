@@ -7,8 +7,8 @@ import javax.swing.{JFrame, WindowConstants}
 object App extends JFrame {
   val screenWidth = 1280
   val screenHeight = 800
-  val gridColsDefault = 65
-  val gridRowsDefault = 65
+  val gridColsDefault = 5
+  val gridRowsDefault = 5
   val gridColsLimit = 320
   val gridRowsLimit = 320
   val zoomIncrements = 8
@@ -22,12 +22,19 @@ object App extends JFrame {
   var gridCols = gridColsDefault
   var gridRows = gridRowsDefault
   var grid: Array[Array[Float]] = null
-  var tileSize = 8
+  var tileSize = zoomIncrements * 16
   var drawCamera = true
   var gameRunning = false
 
+  var debug = true
+
+  if (App.debug) {
+
+  }
+
   def main(): Unit = {
     ImageIO.setUseCache(false)
+    setIconImage(Util.getImage("/images/init.png"))
     setTitle("insulam")
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
     setResizable(false)
@@ -44,9 +51,9 @@ object App extends JFrame {
     card.show(AppContent, String.valueOf(appState))
   }
 
-  def setAppState(appState: APP_STATE): Unit = {
-    this.appState = appState
-    card.show(AppContent, String.valueOf(appState))
+  def resetGame(): Unit = {
+    stopGame()
+    startGame()
   }
 
   def startGame(): Unit = {
@@ -57,14 +64,14 @@ object App extends JFrame {
     gameRunning = true
   }
 
+  def setAppState(appState: APP_STATE): Unit = {
+    this.appState = appState
+    card.show(AppContent, String.valueOf(appState))
+  }
+
   def stopGame(): Unit = {
     gameRunning = false
     Game.stop()
-  }
-
-  def resetGame(): Unit = {
-    stopGame()
-    startGame()
   }
 
   def zoomInOut(i: Int): Unit = {
