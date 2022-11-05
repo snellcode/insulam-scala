@@ -9,8 +9,8 @@
 https://github.com/snellcode/insulam/raw/main/insulam.jar
 
 ## Controls: 
-- move with wasd
-- zoom with mousewheel, or + and -
+- move camera with wasd, or mouse click
+- zoom camera with mousewheel, or + and -
 
 ## Special Thanks To:
 
