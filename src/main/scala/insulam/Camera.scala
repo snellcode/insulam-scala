@@ -7,15 +7,29 @@ object Camera {
   var row = 0
   var speed = 1
 
-  center()
-
   def center(): Unit = {
-    col = (Math.floor(App.gridCols / 2) + 1).toInt
-    row = (Math.floor(App.gridRows / 2) + 1).toInt
+    col = Math.floor(App.gridCols / 2).toInt
+    row = Math.floor(App.gridRows / 2).toInt
   }
 
-  def to(coords: Unit): Unit = {
-    println(coords)
+  def toMouseCoords(mouseX: Int, mouseY: Int): Unit = {
+    var centerX = (App.screenWidth / 2) - (App.tileSize / 2)
+    var centerY = (App.screenHeight / 2) - (App.tileSize / 2)
+    var diffX = mouseX - centerX
+    var diffCol = Math.ceil(diffX / App.tileSize).toInt
+    var diffY = mouseY - centerY
+    var diffRow = Math.ceil(diffY / App.tileSize).toInt
+
+    if (diffX < 0) {
+      diffCol = diffCol - 1
+    }
+
+    if (diffY < 0) {
+      diffRow = diffRow - 1
+    }
+
+    col += diffCol
+    row += diffRow
   }
 
   def update(): Unit = {
@@ -40,18 +54,14 @@ object Camera {
     }
 
     // stop camera from going out of bounds
-    col = Math.min(App.gridCols, Math.max(1, col))
-    row = Math.min(App.gridRows, Math.max(1, row))
+    col = Math.min(App.gridCols - 1, Math.max(0, col))
+    row = Math.min(App.gridRows - 1, Math.max(0, row))
   }
 
   def draw(g2: Graphics2D): Unit = {
     g2.setColor(Color.orange)
     val borderSize = 1
     if (App.drawCamera) {
-      g2.drawRect(0, 0, App.tileSize, App.tileSize)
-      g2.drawRect(0, App.screenHeight - App.tileSize - borderSize, App.tileSize, App.tileSize)
-      g2.drawRect(App.screenWidth - App.tileSize - borderSize, App.screenHeight - App.tileSize - borderSize, App.tileSize, App.tileSize)
-      g2.drawRect(App.screenWidth - App.tileSize - borderSize, 0, App.tileSize, App.tileSize)
       g2.drawRect((App.screenWidth - App.tileSize + borderSize) / 2, (App.screenHeight - App.tileSize + borderSize) / 2, App.tileSize, App.tileSize)
     }
   }

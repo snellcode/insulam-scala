@@ -25,6 +25,9 @@ object KeyHandler extends ActionListener with KeyListener {
       App.zoomInOut(1)
       return
     }
+    if (code == KeyEvent.VK_F3) {
+      App.debug = !App.debug;
+    }
     code match {
       case KeyEvent.VK_ESCAPE =>
 

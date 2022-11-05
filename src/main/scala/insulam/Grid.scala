@@ -2,7 +2,7 @@ package insulam
 
 import com.github.fabioticconi.tergen.HeightMap
 
-import java.awt.{Color, Graphics2D}
+import java.awt.{Color, Font, Graphics2D}
 
 object Grid {
 
@@ -35,22 +35,24 @@ object Grid {
       val image = TileManager.getTileImage(value, col, row)
       g2.drawImage(image, screenX, screenY, App.tileSize, App.tileSize, null)
     }
-    if (App.debug) {
+    if (App.debug && App.tileSize > 32) {
+      val fs = 12
       g2.setColor(Color.GREEN)
       g2.drawRect(screenX, screenY, App.tileSize, App.tileSize)
       g2.setColor(Color.WHITE)
-      g2.fillRect(screenX, screenY, 20, 20)
+      g2.fillRect(screenX, screenY, App.tileSize, fs)
       g2.setColor(Color.BLACK)
-      g2.drawString(row.toString + ", " + col.toString, screenX, screenY + 14)
+      g2.setFont(new Font("Courier New", Font.PLAIN, fs));
+      g2.drawString(row.toString + "," + col.toString, screenX + 1, screenY + fs)
     }
   }
 
   private def getScreenX(col: Int) = {
-    ((col - Camera.col) * App.tileSize) + ((App.screenWidth / 2) - (App.tileSize / 2)) + App.tileSize
+    ((col - (Camera.col + 1)) * App.tileSize) + ((App.screenWidth / 2) - (App.tileSize / 2)) + App.tileSize
   }
 
   private def getScreenY(row: Int) = {
-    ((row - Camera.row) * App.tileSize) + ((App.screenHeight / 2) - (App.tileSize / 2)) + App.tileSize
+    ((row - (Camera.row + 1)) * App.tileSize) + ((App.screenHeight / 2) - (App.tileSize / 2)) + App.tileSize
   }
 
   def getGrid(): Array[Array[Float]] = {

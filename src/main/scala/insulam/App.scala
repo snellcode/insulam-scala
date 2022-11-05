@@ -7,8 +7,8 @@ import javax.swing.{JFrame, WindowConstants}
 object App extends JFrame {
   val screenWidth = 1280
   val screenHeight = 800
-  val gridColsDefault = 5
-  val gridRowsDefault = 5
+  val gridColsDefault = 65
+  val gridRowsDefault = 65
   val gridColsLimit = 320
   val gridRowsLimit = 320
   val zoomIncrements = 8
@@ -25,12 +25,7 @@ object App extends JFrame {
   var tileSize = zoomIncrements * 16
   var drawCamera = true
   var gameRunning = false
-
-  var debug = true
-
-  if (App.debug) {
-
-  }
+  var debug = false
 
   def main(): Unit = {
     ImageIO.setUseCache(false)

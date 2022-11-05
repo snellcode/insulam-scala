@@ -18,33 +18,7 @@ object MouseHandler extends MouseListener with MouseMotionListener {
 
 
   override def mouseClicked(e: MouseEvent): Unit = {
-    var x = e.getX
-    var y = e.getY
-    var centerX = (App.screenWidth / 2) - (App.tileSize / 2)
-    var centerY = (App.screenHeight / 2) - (App.tileSize / 2)
-    var diffX = x - centerX
-    var diffCol = Math.ceil(diffX / App.tileSize).toInt
-    var diffY = y - centerY
-    var diffRow = Math.ceil(diffY / App.tileSize).toInt
 
-//    println(diffX)
-
-    if (diffX < 0) {
-      diffCol = diffCol - 1
-    }
-
-    if (diffY < 0) {
-      diffRow = diffRow - 1
-    }
-
-    var absCol = Math.max(0, Math.min(App.gridCols - 1, diffCol + Math.floor(App.gridCols / 2).toInt))
-    var absRow = Math.max(0, Math.min(App.gridRows - 1, diffRow + Math.floor(App.gridRows / 2).toInt))
-
-    Camera.col = absCol + 1
-    Camera.row = absRow + 1
-
-//    Camera.col = Math.min((App.gridCols - 1), Math.max(0, diffCol + Math.floor(App.gridCols / 2).toInt + 1))
-//    Camera.row = Math.min((App.gridRows - 1), Math.max(0, diffRow + Math.floor(App.gridRows / 2).toInt + 1))
   }
 
   override def mouseEntered(e: MouseEvent): Unit = {
@@ -63,8 +37,7 @@ object MouseHandler extends MouseListener with MouseMotionListener {
   }
 
   override def mouseReleased(e: MouseEvent): Unit = {
-
-
+    Camera.toMouseCoords(e.getX, e.getY);
   }
 
   override def mouseDragged(e: MouseEvent): Unit = {
@@ -77,12 +50,4 @@ object MouseHandler extends MouseListener with MouseMotionListener {
 
   }
 
-
-  //  override def mousePressed(e: MouseEvent): Unit = {
-  //    Camera.to(getClickCoords(e))
-  //  }
-  //
-  //  def getClickCoords(e: MouseEvent): Unit = {
-  //    println(e.getX)
-  //  }
 }

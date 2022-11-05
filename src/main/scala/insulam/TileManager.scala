@@ -31,12 +31,6 @@ object TileManager {
     Color.decode(data(1))
   }
 
-  def getTileImage(value: Float, x: Int, y: Int): BufferedImage = {
-    val index = getTileIndex(value, x, y);
-    val data = tiles(index(0))(index(1))
-    Util.getImage(data(0))
-  }
-
   def getTileIndex(value: Float, x: Int, y: Int): Array[Int] = {
     if (x == Math.floor(App.gridCols / 2) && y == Math.floor(App.gridRows / 2)) {
       return getTileIndexCenter
@@ -86,6 +80,12 @@ object TileManager {
 
   private def getTileIndexCenter = {
     Array(4, 2)
+  }
+
+  def getTileImage(value: Float, x: Int, y: Int): BufferedImage = {
+    val index = getTileIndex(value, x, y);
+    val data = tiles(index(0))(index(1))
+    Util.getImage(data(0))
   }
 
 }
