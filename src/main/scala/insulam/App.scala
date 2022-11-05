@@ -22,7 +22,7 @@ object App extends JFrame {
   var gridCols = gridColsDefault
   var gridRows = gridRowsDefault
   var grid: Array[Array[Float]] = null
-  var tileSize = zoomIncrements * 16
+  var tileSize = minZoom
   var drawCamera = true
   var gameRunning = false
   var debug = false
