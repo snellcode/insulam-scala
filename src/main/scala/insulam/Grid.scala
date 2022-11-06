@@ -10,13 +10,13 @@ object Grid {
     var col = 0
     var row = 0
     while ( {
-      col < App.gridCols && row < App.gridRows
+      col < Game.gridCols && row < Game.gridRows
     }) {
       if (Camera.isVisible(col, row)) {
         drawTile(g2, col, row)
       }
       col += 1
-      if (col == App.gridCols) {
+      if (col == Game.gridCols) {
         col = 0
         row += 1
       }
@@ -26,21 +26,21 @@ object Grid {
   def drawTile(g2: Graphics2D, col: Int, row: Int): Unit = {
     val screenX = getScreenX(col)
     val screenY = getScreenY(row)
-    val value = App.grid(col)(row)
-    if (App.tileSize <= 32) {
+    val value = Game.grid(col)(row)
+    if (Game.tileSize <= 32) {
       val color = TileManager.getTileColor(value, col, row)
       g2.setColor(color)
-      g2.fillRect(screenX, screenY, App.tileSize, App.tileSize)
+      g2.fillRect(screenX, screenY, Game.tileSize, Game.tileSize)
     } else {
       val image = TileManager.getTileImage(value, col, row)
-      g2.drawImage(image, screenX, screenY, App.tileSize, App.tileSize, null)
+      g2.drawImage(image, screenX, screenY, Game.tileSize, Game.tileSize, null)
     }
-    if (App.debug && App.tileSize > 32) {
+    if (Game.debug && Game.tileSize > 32) {
       val fs = 12
       g2.setColor(Color.GREEN)
-      g2.drawRect(screenX, screenY, App.tileSize, App.tileSize)
+      g2.drawRect(screenX, screenY, Game.tileSize, Game.tileSize)
       g2.setColor(Color.WHITE)
-      g2.fillRect(screenX, screenY, App.tileSize, fs)
+      g2.fillRect(screenX, screenY, Game.tileSize, fs)
       g2.setColor(Color.BLACK)
       g2.setFont(new Font("Courier New", Font.PLAIN, fs));
       g2.drawString(row.toString + "," + col.toString, screenX + 1, screenY + fs)
@@ -48,20 +48,20 @@ object Grid {
   }
 
   private def getScreenX(col: Int) = {
-    ((col - (Camera.col + 1)) * App.tileSize) + ((App.screenWidth / 2) - (App.tileSize / 2)) + App.tileSize
+    ((col - (Camera.col + 1)) * Game.tileSize) + ((Game.screenWidth / 2) - (Game.tileSize / 2)) + Game.tileSize
   }
 
   private def getScreenY(row: Int) = {
-    ((row - (Camera.row + 1)) * App.tileSize) + ((App.screenHeight / 2) - (App.tileSize / 2)) + App.tileSize
+    ((row - (Camera.row + 1)) * Game.tileSize) + ((Game.screenHeight / 2) - (Game.tileSize / 2)) + Game.tileSize
   }
 
   def getGrid(): Array[Array[Float]] = {
     val heightMap = new HeightMap()
-      .size(App.gridCols, App.gridRows)
+      .size(Game.gridCols, Game.gridRows)
       .island(0.8f)
     heightMap.fractalNoise
-      .set(16, 0.5f, 3f / Math.max(App.gridCols, App.gridRows), 1f)
-    heightMap.fractalNoise.seed(App.seed)
+      .set(16, 0.5f, 3f / Math.max(Game.gridCols, Game.gridRows), 1f)
+    heightMap.fractalNoise.seed(Game.seed)
     heightMap.build()
   }
 

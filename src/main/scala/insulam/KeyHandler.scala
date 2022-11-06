@@ -18,29 +18,50 @@ object KeyHandler extends ActionListener with KeyListener {
     }
 
     if (code == KeyEvent.VK_SUBTRACT) {
-      App.zoomInOut(-1)
+      Game.zoomInOut(-1)
       return
     }
     if (code == KeyEvent.VK_ADD) {
-      App.zoomInOut(1)
+      Game.zoomInOut(1)
       return
     }
     if (code == KeyEvent.VK_F3) {
-      App.debug = !App.debug;
+      Game.debug = !Game.debug;
+    }
+    if (code == KeyEvent.VK_F1) {
+      if (Game.appState == SCREENS.GAME) {
+        Game.setAppState(SCREENS.HELP)
+      } else if (Game.appState == SCREENS.HELP) {
+        Game.setAppState(SCREENS.GAME)
+      }
     }
     code match {
-      case KeyEvent.VK_ESCAPE =>
-
-      case KeyEvent.VK_W =>
+      case KeyEvent.VK_NUMPAD7 =>
         upPressed = true
-
-      case KeyEvent.VK_S =>
-        downPressed = true
-
-      case KeyEvent.VK_A =>
         leftPressed = true
 
-      case KeyEvent.VK_D =>
+      case KeyEvent.VK_NUMPAD9 =>
+        upPressed = true
+        rightPressed = true
+
+      case KeyEvent.VK_NUMPAD3 =>
+        downPressed = true
+        rightPressed = true
+
+      case KeyEvent.VK_NUMPAD1 =>
+        downPressed = true
+        leftPressed = true
+
+      case KeyEvent.VK_NUMPAD8 | KeyEvent.VK_W =>
+        upPressed = true
+
+      case KeyEvent.VK_NUMPAD2 | KeyEvent.VK_S =>
+        downPressed = true
+
+      case KeyEvent.VK_NUMPAD4 | KeyEvent.VK_A =>
+        leftPressed = true
+
+      case KeyEvent.VK_NUMPAD6 | KeyEvent.VK_D =>
         rightPressed = true
 
       case _ =>
@@ -52,24 +73,40 @@ object KeyHandler extends ActionListener with KeyListener {
     val code = e.getKeyCode
     code match {
       case KeyEvent.VK_ESCAPE =>
-        if (App.appState eq APP_STATE.INIT) {
-          if (JOptionPane.showConfirmDialog(AppContent, "Exit to DOS?", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
+        if (Game.appState eq SCREENS.INIT) {
+          if (JOptionPane.showConfirmDialog(GameContent, "Exit to DOS?", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
             System.exit(0)
           }
         } else {
-          App.setAppState(APP_STATE.INIT)
+          Game.setAppState(SCREENS.INIT)
         }
 
-      case KeyEvent.VK_W =>
+      case KeyEvent.VK_NUMPAD7 =>
         upPressed = false
+        rightPressed = false
 
-      case KeyEvent.VK_S =>
+      case KeyEvent.VK_NUMPAD9 =>
+        upPressed = false
+        rightPressed = false
+
+      case KeyEvent.VK_NUMPAD3 =>
         downPressed = false
+        rightPressed = false
 
-      case KeyEvent.VK_A =>
+      case KeyEvent.VK_NUMPAD1 =>
+        downPressed = false
         leftPressed = false
 
-      case KeyEvent.VK_D =>
+      case KeyEvent.VK_NUMPAD8 | KeyEvent.VK_W =>
+        upPressed = false
+
+      case KeyEvent.VK_NUMPAD2 | KeyEvent.VK_S =>
+        downPressed = false
+
+      case KeyEvent.VK_NUMPAD4 | KeyEvent.VK_A =>
+        leftPressed = false
+
+      case KeyEvent.VK_NUMPAD6 | KeyEvent.VK_D =>
         rightPressed = false
 
       case _ =>

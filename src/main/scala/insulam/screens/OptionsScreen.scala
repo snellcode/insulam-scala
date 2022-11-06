@@ -1,25 +1,27 @@
-package insulam
+package insulam.screens
+
+import insulam.*
 
 import java.awt.{BorderLayout, Color, Graphics, GridLayout}
 import javax.swing.*
 import javax.swing.border.EmptyBorder
 import javax.swing.event.ChangeEvent
 
-object Options extends JPanel {
+object OptionsScreen extends JPanel {
   private val defaultsButton = new JButton("defaults")
   private val mainScreenButton = new JButton("main screen")
   private val randomSeedButton = new JButton("random seed")
   private val buttonsPanel = new JPanel
   private val centerPanel = new JPanel
   private val titleLabel = new JLabel("options", SwingConstants.CENTER)
-  private val gridColsLabel = new JLabel("grid columns")
-  private val gridRowsLabel = new JLabel("grid rows")
+  private val gridColsLabel = new JLabel("grid columns (max " + Game.gridColsLimit + ")")
+  private val gridRowsLabel = new JLabel("grid rows (max " + Game.gridRowsLimit + ")")
   private val fieldsPanel = new JPanel(new GridLayout(3, 2))
   private val resetPanel = new JPanel
   private val seedLabel = new JLabel("seed")
   private val seedField = new JSpinner
-  private val gridColsField = new JSpinner(new SpinnerNumberModel(App.gridColsDefault, 1, App.gridColsLimit, 1))
-  private val gridRowsField = new JSpinner(new SpinnerNumberModel(App.gridRowsDefault, 1, App.gridRowsLimit, 1))
+  private val gridColsField = new JSpinner(new SpinnerNumberModel(Game.gridColsDefault, 1, Game.gridColsLimit, 1))
+  private val gridRowsField = new JSpinner(new SpinnerNumberModel(Game.gridRowsDefault, 1, Game.gridRowsLimit, 1))
   private val titleFont = Util.getTitleFont()
   private val stopGameButton = new JButton("stop current game")
 
@@ -34,7 +36,7 @@ object Options extends JPanel {
   buttonsPanel.add(defaultsButton)
   buttonsPanel.add(randomSeedButton)
 
-  seedField.setValue(Integer.valueOf(App.seed))
+  seedField.setValue(Integer.valueOf(Game.seed))
 
   resetPanel.setVisible(false)
   resetPanel.add(new JLabel("Current game must be stopped to edit options."))
@@ -54,30 +56,30 @@ object Options extends JPanel {
   add(centerPanel, BorderLayout.CENTER)
   add(buttonsPanel, BorderLayout.SOUTH)
 
-  seedField.addChangeListener((e: ChangeEvent) => App.seed = seedField.getValue.asInstanceOf[Int])
-  gridColsField.addChangeListener((e: ChangeEvent) => App.gridCols = gridColsField.getValue.asInstanceOf[Int])
-  gridRowsField.addChangeListener((e: ChangeEvent) => App.gridRows = gridRowsField.getValue.asInstanceOf[Int])
+  seedField.addChangeListener((e: ChangeEvent) => Game.seed = seedField.getValue.asInstanceOf[Int])
+  gridColsField.addChangeListener((e: ChangeEvent) => Game.gridCols = gridColsField.getValue.asInstanceOf[Int])
+  gridRowsField.addChangeListener((e: ChangeEvent) => Game.gridRows = gridRowsField.getValue.asInstanceOf[Int])
 
   mainScreenButton.addActionListener(e => {
-    App.setAppState(APP_STATE.INIT)
+    Game.setAppState(SCREENS.INIT)
   })
 
   randomSeedButton.addActionListener(e => {
-    App.genSeed()
-    seedField.setValue(Integer.valueOf(App.seed))
+    Game.genSeed()
+    seedField.setValue(Integer.valueOf(Game.seed))
   })
 
   defaultsButton.addActionListener(e => {
-    gridColsField.setValue(Integer.valueOf(App.gridColsDefault))
-    App.gridCols = App.gridColsDefault
-    gridRowsField.setValue(Integer.valueOf(App.gridRowsDefault))
-    App.gridRows = App.gridRowsDefault
-    App.genSeed()
-    seedField.setValue(Integer.valueOf(App.seed))
+    gridColsField.setValue(Integer.valueOf(Game.gridColsDefault))
+    Game.gridCols = Game.gridColsDefault
+    gridRowsField.setValue(Integer.valueOf(Game.gridRowsDefault))
+    Game.gridRows = Game.gridRowsDefault
+    Game.genSeed()
+    seedField.setValue(Integer.valueOf(Game.seed))
   })
 
   stopGameButton.addActionListener(e => {
-    App.stopGame()
+    Game.stopGame()
   })
 
   protected override def paintComponent(g: Graphics): Unit = {
@@ -85,7 +87,7 @@ object Options extends JPanel {
     val img = Util.getImage("/images/init.png")
     g.drawImage(img, 0, 0, getWidth, getHeight, this)
 
-    if (App.gameRunning) {
+    if (Game.gameRunning) {
       fieldsPanel.setVisible(false)
       resetPanel.setVisible(true)
       defaultsButton.setVisible(false)

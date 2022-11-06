@@ -1,67 +1,100 @@
 package insulam
 
-import java.awt.{Color, Graphics, Graphics2D}
-import javax.swing.JPanel
+import insulam.screens.{GameScreen, HelpScreen, InitScreen, OptionsScreen}
 
-object Game extends JPanel with Runnable {
-  val nanoSecond = 1000000000
-  var thread: Thread = null
-  var running = false
+import java.awt.{BorderLayout, CardLayout, Dimension}
+import javax.imageio.ImageIO
+import javax.swing.{JFrame, JPanel, WindowConstants}
 
-  setBackground(Color.BLACK)
+enum SCREENS:
+  case INIT, OPTIONS, GAME, HELP
 
-  def start(): Unit = {
-    if (thread == null) {
-      thread = new Thread(this)
-      thread.start()
-    }
-    running = true
+object GameContent extends JPanel {
+  setFocusable(true)
+  requestFocus()
+  requestFocusInWindow
+  grabFocus()
+  addKeyListener(KeyHandler)
+  addMouseWheelListener(MouseHandler.handleMouseWheel)
+  addMouseListener(MouseHandler)
+  addMouseMotionListener(MouseHandler)
+}
+
+object Game extends JFrame {
+  val screenWidth = 1280
+  val screenHeight = 800
+  val gridColsDefault = 100
+  val gridRowsDefault = 100
+  val gridColsLimit = 500
+  val gridRowsLimit = 500
+  val zoomIncrements = 8
+  val minZoom = 1
+  val maxZoom = zoomIncrements * 16
+  private val card = new CardLayout
+  var jFrameOffsetX = 16
+  var jFrameOffsetY = 39
+  var appState = SCREENS.INIT
+  var seed: Int = (Math.random * 1000).toInt
+  var gridCols = gridColsDefault
+  var gridRows = gridRowsDefault
+  var grid: Array[Array[Float]] = null
+  var tileSize = 8
+  var drawCamera = true
+  var gameRunning = false
+  var debug = false
+
+  def main(): Unit = {
+    ImageIO.setUseCache(false)
+    setIconImage(Util.getImage("/images/init.png"))
+    setTitle("insulam")
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
+    setResizable(false)
+    setLayout(new BorderLayout)
+    setPreferredSize(new Dimension(screenWidth + jFrameOffsetX, screenHeight + jFrameOffsetY))
+    add(GameContent)
+    pack
+    setLocationRelativeTo(null)
+    setVisible(true)
+    GameContent.setLayout(card)
+    GameContent.add(InitScreen, String.valueOf(SCREENS.INIT))
+    GameContent.add(OptionsScreen, String.valueOf(SCREENS.OPTIONS))
+    GameContent.add(GameScreen, String.valueOf(SCREENS.GAME))
+    GameContent.add(HelpScreen, String.valueOf(SCREENS.HELP))
+    card.show(GameContent, String.valueOf(appState))
   }
 
-  def stop(): Unit = {
-    // dont know how to stop and start this yet
-    //    running = false
+  def resetGame(): Unit = {
+    stopGame()
+    startGame()
   }
 
-  override def run(): Unit = {
-    val drawInterval: Double = (nanoSecond / 60).asInstanceOf[Double]
-    var delta: Double = 0
-    var lastTime: Long = System.nanoTime
-    var currentTime: Long = 0
-    var timer: Long = 0
-    var drawCount: Int = 0
-    while (running) {
-      currentTime = System.nanoTime
-      delta += ((currentTime - lastTime) / drawInterval)
-      timer += (currentTime - lastTime)
-      lastTime = currentTime
-
-      if (delta >= 1) {
-        if (App.gameRunning) {
-          update()
-          repaint()
-        }
-        delta -= 1
-        drawCount += 1
-      }
-
-      if (timer >= nanoSecond) {
-        drawCount = 0
-        timer = 0
-      }
-    }
+  def startGame(): Unit = {
+    grid = Grid.getGrid()
+    Camera.center()
+    GameScreen.start()
+    setAppState(SCREENS.GAME)
+    gameRunning = true
   }
 
-  def update(): Unit = {
-    Camera.update()
+  def setAppState(appState: SCREENS): Unit = {
+    this.appState = appState
+    card.show(GameContent, String.valueOf(appState))
   }
 
-  override def paintComponent(g: Graphics): Unit = {
-    super.paintComponent(g)
-    val g2 = g.asInstanceOf[Graphics2D]
-    Grid.draw(g2)
-    Camera.draw(g2)
-    g2.dispose()
+  def stopGame(): Unit = {
+    gameRunning = false
+    GameScreen.stop()
+  }
+
+  def zoomInOut(i: Int): Unit = {
+    var newTileSize = tileSize + (i * zoomIncrements)
+    newTileSize = Math.min(maxZoom, newTileSize)
+    newTileSize = Math.max(minZoom, newTileSize)
+    tileSize = newTileSize
+  }
+
+  def genSeed(): Unit = {
+    seed = (Math.random * 1000).toInt
   }
 
 }

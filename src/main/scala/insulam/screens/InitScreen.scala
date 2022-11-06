@@ -1,10 +1,12 @@
-package insulam
+package insulam.screens
+
+import insulam.*
 
 import java.awt.{BorderLayout, Color, Graphics}
 import javax.swing.*
 import javax.swing.border.EmptyBorder
 
-object Init extends JPanel {
+object InitScreen extends JPanel {
   private val titleFont = Util.getTitleFont()
   private val optionsButton = new JButton("options")
   private val newGameButton = JButton("new game")
@@ -29,28 +31,28 @@ object Init extends JPanel {
   add(buttonsPanel, BorderLayout.SOUTH)
 
   optionsButton.addActionListener(e => {
-    App.setAppState(APP_STATE.OPTIONS)
+    Game.setAppState(SCREENS.OPTIONS)
   })
 
   newGameButton.addActionListener(e => {
-    if (App.gameRunning) {
+    if (Game.gameRunning) {
       if (JOptionPane.showConfirmDialog(null, "Reset to New Game?", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
-        App.resetGame()
+        Game.resetGame()
       }
     } else {
-      App.startGame()
+      Game.startGame()
     }
   })
 
   resumeGameButton.addActionListener(e => {
-    App.setAppState(APP_STATE.GAME)
+    Game.setAppState(SCREENS.GAME)
   })
 
   protected override def paintComponent(g: Graphics): Unit = {
     super.paintComponent(g)
     val img = Util.getImage("/images/init.png")
     g.drawImage(img, 0, 0, getWidth, getHeight, this)
-    resumeGameButton.setVisible(App.gameRunning)
+    resumeGameButton.setVisible(Game.gameRunning)
     repaint()
   }
 

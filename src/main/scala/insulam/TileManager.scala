@@ -32,7 +32,7 @@ object TileManager {
   }
 
   def getTileIndex(value: Float, x: Int, y: Int): Array[Int] = {
-    if (x == Math.floor(App.gridCols / 2) && y == Math.floor(App.gridRows / 2)) {
+    if (x == Math.floor(Game.gridCols / 2) && y == Math.floor(Game.gridRows / 2)) {
       return getTileIndexCenter
     }
     if (value <= clamps(0)) {
