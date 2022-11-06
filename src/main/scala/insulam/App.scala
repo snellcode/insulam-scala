@@ -7,12 +7,12 @@ import javax.swing.{JFrame, WindowConstants}
 object App extends JFrame {
   val screenWidth = 1280
   val screenHeight = 800
-  val gridColsDefault = 65
-  val gridRowsDefault = 65
-  val gridColsLimit = 320
-  val gridRowsLimit = 320
+  val gridColsDefault = 129
+  val gridRowsDefault = 129
+  val gridColsLimit = 500
+  val gridRowsLimit = 500
   val zoomIncrements = 8
-  val minZoom = zoomIncrements
+  val minZoom = 1
   val maxZoom = zoomIncrements * 16
   private val card = new CardLayout
   var jFrameOffsetX = 16
@@ -22,7 +22,7 @@ object App extends JFrame {
   var gridCols = gridColsDefault
   var gridRows = gridRowsDefault
   var grid: Array[Array[Float]] = null
-  var tileSize = minZoom
+  var tileSize = 8
   var drawCamera = true
   var gameRunning = false
   var debug = false

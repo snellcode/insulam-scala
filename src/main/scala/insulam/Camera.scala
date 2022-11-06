@@ -13,11 +13,11 @@ object Camera {
   }
 
   def toMouseCoords(mouseX: Int, mouseY: Int): Unit = {
-    var centerX = (App.screenWidth / 2) - (App.tileSize / 2)
-    var centerY = (App.screenHeight / 2) - (App.tileSize / 2)
-    var diffX = mouseX - centerX
+    val centerX = (App.screenWidth / 2) - (App.tileSize / 2)
+    val centerY = (App.screenHeight / 2) - (App.tileSize / 2)
+    val diffX = mouseX - centerX
+    val diffY = mouseY - centerY
     var diffCol = Math.ceil(diffX / App.tileSize).toInt
-    var diffY = mouseY - centerY
     var diffRow = Math.ceil(diffY / App.tileSize).toInt
 
     if (diffX < 0) {
