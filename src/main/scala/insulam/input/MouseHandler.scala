@@ -1,19 +1,13 @@
-package insulam
+package insulam.input
+
+import insulam.*
+import insulam.grid.Camera
 
 import java.awt.Component
 import java.awt.event.*
 
-object GameMouseWheelListener extends MouseWheelListener {
-  override def mouseWheelMoved(e: MouseWheelEvent): Unit = {
-    if (e.getWheelRotation < 0) {
-      Game.zoomInOut(1)
-    } else {
-      Game.zoomInOut(-1)
-    }
-  }
-}
-
 object MouseHandler extends MouseListener with MouseMotionListener {
+
   val handleMouseWheel = GameMouseWheelListener
 
   override def mouseReleased(e: MouseEvent): Unit = {
@@ -42,6 +36,16 @@ object MouseHandler extends MouseListener with MouseMotionListener {
 
   override def mouseMoved(e: MouseEvent): Unit = {
 
+  }
+
+  object GameMouseWheelListener extends MouseWheelListener {
+    override def mouseWheelMoved(e: MouseWheelEvent): Unit = {
+      if (e.getWheelRotation < 0) {
+        Game.zoomInOut(1)
+      } else {
+        Game.zoomInOut(-1)
+      }
+    }
   }
 
 }

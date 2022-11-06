@@ -1,6 +1,7 @@
 package insulam.screens
 
 import insulam.*
+import insulam.grid.{Camera, Grid}
 
 import java.awt.{Color, Graphics, Graphics2D}
 import javax.swing.JPanel

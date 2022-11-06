@@ -1,6 +1,8 @@
 package insulam
 
-import insulam.screens.{GameScreen, HelpScreen, InitScreen, OptionsScreen}
+import insulam.grid.{Camera, Grid}
+import insulam.input.{KeyHandler, MouseHandler}
+import insulam.screens.*
 
 import java.awt.{BorderLayout, CardLayout, Dimension}
 import javax.imageio.ImageIO
@@ -8,17 +10,6 @@ import javax.swing.{JFrame, JPanel, WindowConstants}
 
 enum SCREENS:
   case INIT, OPTIONS, GAME, HELP
-
-object GameContent extends JPanel {
-  setFocusable(true)
-  requestFocus()
-  requestFocusInWindow
-  grabFocus()
-  addKeyListener(KeyHandler)
-  addMouseWheelListener(MouseHandler.handleMouseWheel)
-  addMouseListener(MouseHandler)
-  addMouseMotionListener(MouseHandler)
-}
 
 object Game extends JFrame {
   val screenWidth = 1280
@@ -95,6 +86,17 @@ object Game extends JFrame {
 
   def genSeed(): Unit = {
     seed = (Math.random * 1000).toInt
+  }
+
+  object GameContent extends JPanel {
+    setFocusable(true)
+    requestFocus()
+    requestFocusInWindow
+    grabFocus()
+    addKeyListener(KeyHandler)
+    addMouseWheelListener(MouseHandler.handleMouseWheel)
+    addMouseListener(MouseHandler)
+    addMouseMotionListener(MouseHandler)
   }
 
 }

@@ -1,6 +1,7 @@
-package insulam
+package insulam.grid
 
 import com.github.fabioticconi.tergen.HeightMap
+import insulam.*
 
 import java.awt.{Color, Font, Graphics2D}
 

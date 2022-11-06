@@ -1,7 +1,9 @@
-package insulam
+package insulam.grid
 
+import insulam.{Game, Util}
+
+import java.awt.Color
 import java.awt.image.BufferedImage
-import java.awt.{Color, Image}
 
 object TileManager {
   private val clamps = Array[Float](
@@ -29,6 +31,12 @@ object TileManager {
     val index = getTileIndex(value, x, y);
     val data = tiles(index(0))(index(1))
     Color.decode(data(1))
+  }
+
+  def getTileImage(value: Float, x: Int, y: Int): BufferedImage = {
+    val index = getTileIndex(value, x, y);
+    val data = tiles(index(0))(index(1))
+    Util.getImage(data(0))
   }
 
   def getTileIndex(value: Float, x: Int, y: Int): Array[Int] = {
@@ -80,12 +88,6 @@ object TileManager {
 
   private def getTileIndexCenter = {
     Array(4, 2)
-  }
-
-  def getTileImage(value: Float, x: Int, y: Int): BufferedImage = {
-    val index = getTileIndex(value, x, y);
-    val data = tiles(index(0))(index(1))
-    Util.getImage(data(0))
   }
 
 }

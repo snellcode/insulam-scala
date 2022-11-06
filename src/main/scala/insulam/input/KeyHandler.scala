@@ -1,4 +1,7 @@
-package insulam
+package insulam.input
+
+import insulam.*
+import insulam.grid.Camera
 
 import java.awt.event.{ActionEvent, ActionListener, KeyEvent, KeyListener}
 import javax.swing.JOptionPane
@@ -74,7 +77,7 @@ object KeyHandler extends ActionListener with KeyListener {
     code match {
       case KeyEvent.VK_ESCAPE =>
         if (Game.appState eq SCREENS.INIT) {
-          if (JOptionPane.showConfirmDialog(GameContent, "Exit to DOS?", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
+          if (JOptionPane.showConfirmDialog(Game, "Exit to DOS?", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
             System.exit(0)
           }
         } else {

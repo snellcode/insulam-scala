@@ -1,4 +1,7 @@
-package insulam
+package insulam.grid
+
+import insulam.Game
+import insulam.input.KeyHandler
 
 import java.awt.{Color, Graphics2D}
 
